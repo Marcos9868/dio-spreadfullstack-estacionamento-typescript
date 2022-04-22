@@ -8,7 +8,14 @@ interface Veiculo {
   const $ = (query: string): HTMLInputElement | null => document.querySelector(query)
 
   function patio() {
-    const lerVeiculos = () => {}
+    const lerVeiculos = () => {
+      return localStorage.patio ? JSON.parse(localStorage.patio) : []
+    }
+
+    const salvarVeiculos = (veiculos: Veiculo[]) => {
+      localStorage.setItem('patio', JSON.stringify(veiculos))
+    }
+
     const adicionarVeiculos = (veiculo: Veiculo) => {
       const row = document.createElement('tr')
 
@@ -22,9 +29,10 @@ interface Veiculo {
       `
 
       $("#patio")?.appendChild(row)
+
+      salvarVeiculos([...lerVeiculos(), veiculo])
     }
     const removerVeiculos = () => {}
-    const salvarVeiculos = () => {}
     const renderVeiculos = () => {}
 
     return { lerVeiculos, adicionarVeiculos, removerVeiculos, salvarVeiculos, renderVeiculos }
