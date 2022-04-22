@@ -37,5 +37,7 @@ interface Veiculo {
       alert('Dados de Veículo e Placa obrigatórios!')
       return
     }
+
+    patio().adicionarVeiculos({ veiculo, placa, entrada: new Date })
   })
 })()
