@@ -4,3 +4,41 @@
   box-sizing: border-box;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+  background-color: #111111;
+}
+
+.entrada {
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  height: 150px;
+  border-radius: 15px;
+  background-color: darkblue;
+  align-items: center;
+  padding-top: 15px;
+  margin-bottom: 30px;
+}
+
+.entrada input {
+  margin-bottom: 5px;
+}
+
+.entrada label {
+  margin-bottom: 5px;
+}
+
+.veiculos {
+  display: flex;
+  color: whitesmoke;
+  width: 650px;
+  height: 300px;
+  background-color:darkblue;
+  border-radius: 15px;
+  justify-content: space-evenly;
+}
