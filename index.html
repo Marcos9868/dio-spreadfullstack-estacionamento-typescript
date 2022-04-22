@@ -4,36 +4,41 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/style.css">
   <title>Estacionamento</title>
 </head>
 <body>
-  <label for="">Veículo:</label>
-  <input 
-    type="text"
-    id="veiculo"
-    placeholder="Digite o nome do veículo: " 
-    autocomplete="off"
-  >
-  <label for="">Placa:</label>
-  <input 
-    type="text" 
-    id="placa" 
-    placeholder="Digite a placa do veículo: " 
-    autocomplete="off"
-  >
-  <button id="cadastrar">Cadastrar</button>
+  <div class="entrada">
+    <label for="">Veículo:</label>
+    <input
+      type="text"
+      id="veiculo"
+      placeholder="Digite o nome do veículo: "
+      autocomplete="off"
+    >
+    <label for="">Placa:</label>
+    <input
+      type="text"
+      id="placa"
+      placeholder="Digite a placa do veículo: "
+      autocomplete="off"
+    >
+    <button id="cadastrar">Cadastrar</button>
+  </div>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Nome</th>
-        <th>Placa</th>
-        <th>Entrada</th>
-        <th>Ações</th>
-      </tr>
-    </thead>
-    <tbody id="patio"></tbody>
-  </table>
+  <div class="veiculos">
+    <table>
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Placa</th>
+          <th>Entrada</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody id="patio"></tbody>
+    </table>
+  </div>
   <script src="./ts/script.js"></script>
 </body>
 </html>
