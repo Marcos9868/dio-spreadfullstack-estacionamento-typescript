@@ -9,8 +9,15 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 50px;
+  margin-top: 30px;
   background-color: #111111;
+}
+
+.titulo {
+  width: 390px;
+  height: 50px;
+  color: whitesmoke;
+  margin-bottom: 10px;
 }
 
 .entrada {
@@ -43,15 +50,26 @@ body {
   height: 25px;
   border-radius: 10px;
   border: none;
+  cursor: pointer;
+}
 
+.entrada button:hover {
+  color: whitesmoke;
+  background-color: #111111;
 }
 
 .veiculos {
   display: flex;
   color: whitesmoke;
-  width: 650px;
+  width: 500px;
   height: 300px;
   background-color:darkblue;
   border-radius: 15px;
   justify-content: space-evenly;
+  padding-top: 10px;
+}
+
+footer {
+  color: whitesmoke;
+  margin-top: 25px;
 }
