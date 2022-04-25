@@ -1,7 +1,7 @@
 interface Veiculo {
   veiculo: string,
   placa: string,
-  entrada: Date
+  entrada: Date | string
 }
 
 (function() {
@@ -44,12 +44,12 @@ interface Veiculo {
     }
 
     function removerVeiculos(placa: string) {
-      const { entrada, veiculo } = lerVeiculos().find(veiculo => veiculo.placa === placa)
-      const tempo = calcTempo(new Date().getTime() - entrada.getTime())
+      const { entrada, veiculo } = lerVeiculos().find((veiculo) => veiculo.placa === placa)
+      const tempo = calcTempo(new Date().getTime() - new Date(entrada).getTime())
 
-      if (confirm(`O veículo ${veiculo} permaneceu por ${tempo}. Deseja encerrar?`)) return
+      if (!confirm(`O veículo ${veiculo} permaneceu por ${tempo}. Deseja encerrar?`)) return
 
-      salvarVeiculos(lerVeiculos().filter(veiculo => veiculo.placa !== placa))
+      salvarVeiculos(lerVeiculos().filter((veiculo) => veiculo.placa !== placa))
       renderVeiculos()
     }
 
@@ -75,6 +75,6 @@ interface Veiculo {
       return
     }
 
-    patio().adicionarVeiculos({ veiculo, placa, entrada: new Date }, true)
+    patio().adicionarVeiculos({ veiculo, placa, entrada: new Date().toISOString() }, true)
   })
 })()
