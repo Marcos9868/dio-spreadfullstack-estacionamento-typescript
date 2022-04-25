@@ -7,16 +7,23 @@ interface Veiculo {
 (function() {
   const $ = (query: string): HTMLInputElement | null => document.querySelector(query)
 
+  function calcTempo(mil: number) {
+    const min = Math.floor(mil / 60000)
+    const sec = Math.floor(mil % 60000)
+
+    return `${min}m e ${sec}s`
+  }
+
   function patio() {
-    const lerVeiculos = () => {
+    function lerVeiculos(): Veiculo[] {
       return localStorage.patio ? JSON.parse(localStorage.patio) : []
     }
 
-    const salvarVeiculos = (veiculos: Veiculo[]) => {
+    function salvarVeiculos(veiculos: Veiculo[]) {
       localStorage.setItem('patio', JSON.stringify(veiculos))
     }
 
-    const adicionarVeiculos = (veiculo: Veiculo) => {
+    function adicionarVeiculos(veiculo: Veiculo, salva?: boolean) {
       const row = document.createElement('tr')
 
       row.innerHTML = `
@@ -27,16 +34,38 @@ interface Veiculo {
           <button class="delete" data-placa="${veiculo.placa}">X</button>
         </td>
       `
+      row.querySelector(".delete")?.addEventListener("click", function() {
+        removerVeiculos(this.dataset.placa)
+      })
 
       $("#patio")?.appendChild(row)
 
-      salvarVeiculos([...lerVeiculos(), veiculo])
+      if(salva) salvarVeiculos([...lerVeiculos(), veiculo])
     }
-    const removerVeiculos = () => {}
-    const renderVeiculos = () => {}
+
+    function removerVeiculos(placa: string) {
+      const { entrada, veiculo } = lerVeiculos().find(veiculo => veiculo.placa === placa)
+      const tempo = calcTempo(new Date().getTime() - entrada.getTime())
+
+      if (confirm(`O veículo ${veiculo} permaneceu por ${tempo}. Deseja encerrar?`)) return
+
+      salvarVeiculos(lerVeiculos().filter(veiculo => veiculo.placa !== placa))
+      renderVeiculos()
+    }
+
+    function renderVeiculos() {
+      $("#patio")!.innerHTML = ""
+      const patio = lerVeiculos()
+
+      if (patio.length) {
+        patio.forEach((veiculo) => adicionarVeiculos(veiculo))
+      }
+    }
 
     return { lerVeiculos, adicionarVeiculos, removerVeiculos, salvarVeiculos, renderVeiculos }
   }
+
+  patio().renderVeiculos()
 
   $('#cadastrar')?.addEventListener("click", () => {
     const veiculo = $('#veiculo')?.value
@@ -46,6 +75,6 @@ interface Veiculo {
       return
     }
 
-    patio().adicionarVeiculos({ veiculo, placa, entrada: new Date })
+    patio().adicionarVeiculos({ veiculo, placa, entrada: new Date }, true)
   })
 })()
