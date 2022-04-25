@@ -47,7 +47,11 @@ interface Veiculo {
       const { entrada, veiculo } = lerVeiculos().find((veiculo) => veiculo.placa === placa)
       const tempo = calcTempo(new Date().getTime() - new Date(entrada).getTime())
 
-      if (!confirm(`O veículo ${veiculo} permaneceu por ${tempo}. Deseja encerrar?`)) return
+      if (!confirm(`O veículo ${veiculo} permaneceu por ${tempo}. Deseja encerrar?`)) {
+        return
+      } else {
+        window.alert('Obrigado por utilizar nosso serviço')
+      }
 
       salvarVeiculos(lerVeiculos().filter((veiculo) => veiculo.placa !== placa))
       renderVeiculos()
